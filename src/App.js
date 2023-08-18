@@ -74,7 +74,7 @@ const ExcelComparator = () => {
         for (const row1 of sheetData1) {
           for (const row2 of sheetData2) {
             if (row1[selectedColumn] === row2[selectedColumn]) {
-              similarRows.push({ name: row1.Name, branch: row1.Branch });
+              similarRows.push({ column: row1[selectedColumn], branch: row1.Branch });
             }
           }
         }
@@ -93,7 +93,7 @@ const ExcelComparator = () => {
       <Grid container spacing={2} justifyContent="center">
         <Grid item xs={12}>
           <Typography variant="h4" align="center" gutterBottom>
-            CBIT - PLACEMENTS
+            Excel Comparator
           </Typography>
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -127,12 +127,9 @@ const ExcelComparator = () => {
             <DialogContent>
               <DialogContentText>
                 {/* Add your instructions here */}
-                1. Upload both sheets to get the option to select the column for comparision.
-                2. Make sure column name is similar in both  the sheets.
-                <br/>
-                3. Rename Column(Which can be First name or Last name) as 'name'.
-                <br/>
-                4. Column name for branch/Major should be  'branch' 
+               1. Upload two files, then you will get option to choose the column for comparision
+               <br/> 
+               2. Make sure column name is same in both the sheets.
               </DialogContentText>
             </DialogContent>
             <DialogActions>
@@ -152,14 +149,14 @@ const ExcelComparator = () => {
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <TableCell>Name</TableCell>
+                      <TableCell>Column Value</TableCell>
                       <TableCell>Branch</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {similarRows.map((row, index) => (
                       <TableRow key={index}>
-                        <TableCell>{row.name}</TableCell>
+                        <TableCell>{row.column}</TableCell>
                         <TableCell>{row.branch}</TableCell>
                       </TableRow>
                     ))}
