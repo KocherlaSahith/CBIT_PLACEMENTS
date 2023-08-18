@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, FormControl, InputLabel, MenuItem, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, Grid, Container } from '@mui/material';
+import { Button, FormControl, InputLabel, MenuItem, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, Grid, Container, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
 import * as XLSX from 'xlsx';
 
 const ExcelComparator = () => {
@@ -8,6 +8,15 @@ const ExcelComparator = () => {
   const [selectedColumn, setSelectedColumn] = useState('');
   const [columnOptions, setColumnOptions] = useState([]);
   const [similarRows, setSimilarRows] = useState([]);
+  const [instructionsOpen, setInstructionsOpen] = useState(false);
+
+  const handleInstructionsOpen = () => {
+    setInstructionsOpen(true);
+  };
+
+  const handleInstructionsClose = () => {
+    setInstructionsOpen(false);
+  };
 
   const handleFile1Change = (event) => {
     setFile1(event.target.files[0]);
@@ -84,7 +93,7 @@ const ExcelComparator = () => {
       <Grid container spacing={2} justifyContent="center">
         <Grid item xs={12}>
           <Typography variant="h4" align="center" gutterBottom>
-            CBIT Placements
+            Excel Comparator
           </Typography>
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -110,6 +119,28 @@ const ExcelComparator = () => {
           <Button variant="contained" onClick={() => setSimilarRows([])}>
             Clear
           </Button>
+          <Button variant="outlined" onClick={handleInstructionsOpen} style={{ marginLeft: '10px' }}>
+            Instructions
+          </Button>
+          <Dialog open={instructionsOpen} onClose={handleInstructionsClose}>
+            <DialogTitle>Instructions to Use</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                {/* Add your instructions here */}
+                1. Upload both sheets to get the option to select the column for comparision.
+                2. Make sure column name is similar in both  the sheets.
+                <br/>
+                3. Rename Column(Which can be First name or Last name) as 'name'.
+                <br/>
+                4. Column name for branch/Major should be  'branch' 
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleInstructionsClose} color="primary">
+                Close
+              </Button>
+            </DialogActions>
+          </Dialog>
         </Grid>
         <Grid item xs={12}>
           {similarRows.length > 0 && (
