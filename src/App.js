@@ -93,7 +93,7 @@ const ExcelComparator = () => {
       <Grid container spacing={2} justifyContent="center">
         <Grid item xs={12}>
           <Typography variant="h4" align="center" gutterBottom>
-            Excel Comparator
+           CBIT - Placements
           </Typography>
         </Grid>
         <Grid item xs={12} sm={6}>
